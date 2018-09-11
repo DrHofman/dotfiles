@@ -1,0 +1,51 @@
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[user]
+	name = Daniel Zitzman
+	email = daniel.zitzman@besedo.com
+[color]
+	ui = auto
+[alias]
+	lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+	s = status --short --branch
+	co = checkout
+	b = branch
+	prune-branches = "!git branch --merged | grep -Ev '^\\*|  master$' | xargs git branch --delete"
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/danielzitzman/.gitignore_global
+	editor = vim
+	autocrlf = input
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[url "https://"]
+	insteadOf = git://
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
+[branch]
+	autosetuprebase = always
+[rebase]
+	stat = true
+	autostash = true
+[grep]
+	lineNumber = true
+[log]
+	follow = true
+[pager]
+	diff = (diff-so-fancy 2> /dev/null || cat) | less -R
+	show = (diff-so-fancy 2> /dev/null || cat) | less -R
+[commit]
+	template = /Users/danielzitzman/.stCommitMsg

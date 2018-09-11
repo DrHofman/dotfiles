@@ -1,0 +1,8 @@
+.netrwhist
+undo/
+spell/
+plugged/
+view/
+autoload/plug.vim
+autoload/plug.vim.old
+revert.sh
