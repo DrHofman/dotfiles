@@ -4,7 +4,7 @@
 	smudge = git media smudge %f
 [user]
 	name = Daniel Zitzman
-	email = daniel.zitzman@besedo.com
+	email = daniel.zitzman@gig.com
 [color]
 	ui = auto
 [alias]
@@ -17,7 +17,7 @@
 	default = simple
 [core]
 	excludesfile = /Users/danielzitzman/.gitignore_global
-	editor = vim
+	editor = nvim
 	autocrlf = input
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -48,4 +48,4 @@
 	diff = (diff-so-fancy 2> /dev/null || cat) | less -R
 	show = (diff-so-fancy 2> /dev/null || cat) | less -R
 [commit]
-	template = /Users/danielzitzman/.stCommitMsg
+	template = /Users/daniel.zitzman/.stCommitMsg

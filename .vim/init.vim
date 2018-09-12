@@ -1,1 +1,0 @@
-/Users/danielzitzman/.vimrc
