@@ -3,7 +3,6 @@
 " So configuration for tmux.vim would go in modules/plugins/tmux.vim.vim
 
 Plug 'sbdchd/neoformat'
-Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
@@ -40,6 +39,7 @@ Plug 'raymond-w-ko/vim-niji'
 Plug 'mileszs/ack.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'alunny/pegjs-vim'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
