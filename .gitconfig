@@ -16,15 +16,9 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/danielzitzman/.gitignore_global
+	excludesfile = /Users/daniel.zitzman/.gitignore_global
 	editor = nvim
 	autocrlf = input
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [url "https://"]
 	insteadOf = git://
 [filter "hawser"]
@@ -49,3 +43,7 @@
 	show = (diff-so-fancy 2> /dev/null || cat) | less -R
 [commit]
 	template = /Users/daniel.zitzman/.stCommitMsg
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff

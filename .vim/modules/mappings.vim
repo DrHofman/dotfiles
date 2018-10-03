@@ -88,6 +88,7 @@ nnoremap <silent> st :TernDefTab<CR>
 
 " Ctrl-p remap
 nnoremap <silent> pp :CtrlP<CR>
+nnoremap <silent> pt :CtrlPTag<CR>
 
 " Called once right before you start selecting multiple cursors
 function! Multiple_cursors_before()

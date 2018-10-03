@@ -2,27 +2,33 @@
 " plugins depend on it during start up.
 set backspace=indent,eol,start
 
-" Set numbers display
-set number
-set relativenumber
+set termguicolors
 
-set autoread
+set number "Set numbers display
+set relativenumber "Show numbers relative to current line
+set autoread "reload file on external change
 
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
-" let g:auto_save_silent = 1
-
-" Enable invisible characters.
-set list
+set showcmd "Show incomplete cmds down the bottom
+set noshowmode "Hide showmode because of the powerline plugin
+set gdefault "Set global flag for search and replace
+set guicursor=a:blinkon500-blinkwait500-blinkoff500 "Set cursor blinking rate
 
 " More natural splitting.
 set splitbelow
 set splitright
 
-" Set a default indent, but vim-sleuth should adjust it.
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set wrap "Enable word wrap
+set linebreak "Wrap lines at convenient points
+set listchars=tab:\ \ ,trail:· "Set trails for tabs and spaces
+set list "Enable listchars
+
+
+set pumheight=15 "Maximum number of entries in autocomplete popup
+set tagcase=smart "Use smarcase for tags
+
+" Use syntax highlighting only for 300 columns
+set synmaxcol=300
+set shortmess+=c
 
 " Put swap files into a temp folder so that they are not scattered all over
 if has("win32")
