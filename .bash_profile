@@ -1,7 +1,6 @@
 # Some sanity
 
-export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh --no-use"
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion #bash completion
 
 alias ll='ls -la'
 alias lf='ls -F'
@@ -12,7 +11,7 @@ alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelpe
 alias me="ssh -o ServerAliveInterval=60 ec2-user@52.209.87.201"
 alias dictionary="nvim /Users/danielzitzman/Library/Spelling/LocalDictionary"
 alias vimsync="nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa"
-alias notes="cd /Users/danielzitzman/notes; nvim"
+alias notes="cd /Users/daniel.zitzman/notes; nvim"
 alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
@@ -38,6 +37,3 @@ alias g='cd ~/projects/gig'
 alias r='cd ~/projects/gig/rizk'
 alias d='cd ~/projects/gig/rizk-devenv'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
