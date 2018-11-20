@@ -9,34 +9,34 @@ endsnippet
 
 # New bare unit test with proxyquire
 snippet unittest "new unit test" w
-'use strict';
+/* eslint-env mocha */
+'use strict'
 
-const proxyquire = require('proxyquire');
-const chai = require('chai');
-const expect = chai.expect;
-const sinon = require('sinon');
+const proxyquire = require('proxyquire')
+const chai = require('chai')
+const expect = chai.expect
+const sinon = require('sinon')
 
-chai.use(require('sinon-chai'));
+chai.use(require('sinon-chai'))
 
-describe('# ${VISUAL}$1', function() {
-  let module;
+describe('# ${VISUAL}$1', function () {
+  let Module
+  let module
 
-  beforeEach(function() {
-    module = proxyquire(process.cwd() + '/path', {
-    });
+  beforeEach(function () {
 
-  });
+    Module = proxyquire(process.cwd() + '/path', {
+    })
 
-  describe('${VISUAL}$2', function() {
+    module = Module()
+  })
 
+  describe('${VISUAL}$2', function () {
     it('${VISUAL}$3', function() {
       ${VISUAL}$4
     });
-
-  });
-
-});
-
+  })
+})
 endsnippet
 
 snippet restify "Base restify app index file" w

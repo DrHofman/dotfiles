@@ -29,4 +29,14 @@ let g:projectionist_heuristics = {
   \      "type": "test"
   \    }
   \  },
+  \  "*.php": {
+  \    "*.php": {
+  \      "alternate": ["tests/{}Test.php"],
+  \      "type": "source"
+  \    },
+  \    "tests/*Test.php": {
+  \      "alternate": "{}.php",
+  \      "type": "test"
+  \    }
+  \  },
   \}

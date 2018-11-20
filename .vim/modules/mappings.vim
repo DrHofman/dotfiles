@@ -69,7 +69,8 @@ function! s:show_mappings()
 endfunction
 
 nnoremap <silent> <leader><leader> :call <SID>show_mappings()<CR>
-nnoremap <silent> <leader>ff :Neoformat<CR>
+nnoremap <silent> <leader>ff :ALEFix<CR>
+nnoremap <silent> <leader>cf :ALELint<CR>
 nnoremap <silent> <leader>av :AV<CR>
 nnoremap <silent> <leader>q :q<CR>
 

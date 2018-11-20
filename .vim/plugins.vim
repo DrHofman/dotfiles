@@ -15,7 +15,6 @@ Plug 'ctrlpvim/ctrlp.vim' "Fuzzy file, buffer, mru, tag, etc finder
 Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim' "EditorConfig plugin for Vim
 Plug 'ervandew/supertab' "Perform all your vim insert mode completions with Tab
-Plug 'gyim/vim-boxdraw' "An ASCII box drawing plugin for Vim
 Plug 'haya14busa/incsearch.vim' "Improved incremental searching for Vim
 Plug 'haya14busa/vim-asterisk' "asterisk.vim provides improved * motions
 Plug 'elzr/vim-json'
@@ -39,7 +38,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
