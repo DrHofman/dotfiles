@@ -12,7 +12,7 @@ Plug 'kristijanhusak/deoplete-phpactor' "Phpactor integration for deoplete.nvim
 Plug 'mbbill/undotree' "The ultimate undo history visualizer for VIM
 Plug 'airblade/vim-gitgutter' "A Vim plugin which shows a git diff in the gutter
 Plug 'ctrlpvim/ctrlp.vim' "Fuzzy file, buffer, mru, tag, etc finder
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim' "EditorConfig plugin for Vim
 Plug 'ervandew/supertab' "Perform all your vim insert mode completions with Tab
 Plug 'haya14busa/incsearch.vim' "Improved incremental searching for Vim
@@ -48,3 +48,6 @@ Plug 'vim-scripts/applescript.vim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'mhinz/vim-nginx'
 Plug 'lumiliet/vim-twig' "Twig syntax highlighting, snipMate, etc.
+Plug 'vim-vdebug/vdebug' "Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'

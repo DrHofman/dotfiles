@@ -16,9 +16,11 @@ alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
 alias rr="redis-cli -h 192.168.29.2"
+alias sql="mysql -h 192.168.29.2 -uroot -p123"
 
 alias staging="osascript /Users/daniel.zitzman/projects/staging-worker.applescript"
 alias production="osascript /Users/daniel.zitzman/projects/production-worker.applescript"
+alias glab="ssh -o ServerAliveInterval=60 root@git.rizk.com"
 
 # current dir in iterm tab title
 if [ $ITERM_SESSION_ID ]; then
@@ -39,3 +41,7 @@ alias r='cd ~/projects/gig/rizk'
 alias bo='cd ~/projects/gig/rizk-bo'
 alias d='cd ~/projects/gig/rizk-devenv'
 
+
+export PATH="$PATH:/Applications/Muse"
+
+export DYLD_FALLBACK_LIBRARY_PATH="$DYLD_FALLBACK_LIBRARY_PATH:/Applications/Muse"

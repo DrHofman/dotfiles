@@ -1,5 +1,5 @@
 let g:ale_linters = {
-\   'javascript': ['standard'],
+\   'javascript': ['eslint'],
 \   'yaml': ['prettier'],
 \   'less': ['prettier'],
 \   'json': ['prettier'],
@@ -7,7 +7,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\   'javascript': ['standard'],
+\   'javascript': ['eslint'],
 \   'yaml': ['prettier'],
 \   'less': ['prettier'],
 \   'json': ['prettier'],
