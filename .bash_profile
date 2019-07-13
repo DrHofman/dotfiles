@@ -8,19 +8,14 @@ alias vimrc='cd /Users/daniel.zitzman; nvim ~/.vim/plugins.vim'
 alias bashrc='nvim ~/.bash_profile'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
-alias me="ssh -o ServerAliveInterval=60 ec2-user@52.209.87.201"
 alias dictionary="nvim /Users/danielzitzman/Library/Spelling/LocalDictionary"
 alias vimsync="nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa"
 alias notes="cd /Users/daniel.zitzman/notes; nvim"
 alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
-alias rr="redis-cli -h 192.168.29.2"
-alias sql="mysql -h 192.168.29.2 -uroot -p123"
 
-alias staging="osascript /Users/daniel.zitzman/projects/staging-worker.applescript"
-alias production="osascript /Users/daniel.zitzman/projects/production-worker.applescript"
-alias glab="ssh -o ServerAliveInterval=60 root@git.rizk.com"
+source .bash_profile_secret
 
 # current dir in iterm tab title
 if [ $ITERM_SESSION_ID ]; then
