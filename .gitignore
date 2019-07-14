@@ -2,7 +2,6 @@
 # User defined ignores
 # =========================
 /*
-!.vimrc
 !.bash_profile
 !.editorconfig
 !.gitattributes
@@ -12,6 +11,7 @@
 !.stCommitMsg
 !.tern-config
 !.tern-project
+!.config/nvim/init.vim
 !.vim/
 !.vim/*
 .DS_Store

@@ -2,7 +2,8 @@
 " Configuration goes in the appropriate modules/plugins/*.vim file.
 " So configuration for tmux.vim would go in modules/plugins/tmux.vim.vim
 
-Plug 'w0rp/ale' "Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration
+Plug 'mhinz/vim-startify' "The fancy start screen for Vim.
+Plug 'prettier/vim-prettier', { 'do': 'npm install' } "A Vim plugin for Prettier
 Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
 Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plug 'SirVer/ultisnips' "UltiSnips - The ultimate snippet solution for Vim

@@ -52,6 +52,9 @@ noremap h k
 noremap k j
 noremap j h
 
+noremap j <Nop>
+noremap l <Nop>
+
 nnoremap <silent> <up> <C-W><C-k>
 nnoremap <silent> <down> <C-W><C-j>
 nnoremap <silent> <left> <C-W><C-h>

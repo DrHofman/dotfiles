@@ -34,7 +34,7 @@ export EDITOR=nvim
 alias g='cd ~/projects/gig'
 alias r='cd ~/projects/gig/rizk'
 alias bo='cd ~/projects/gig/rizk-bo'
-alias d='cd ~/projects/gig/rizk-devenv'
+alias d='cd ~/projects/gig/devenv-vagrant'
 
 
 export PATH="$PATH:/Applications/Muse"
