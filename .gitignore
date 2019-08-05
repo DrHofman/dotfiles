@@ -11,7 +11,8 @@
 !.stCommitMsg
 !.tern-config
 !.tern-project
-!.config/nvim/init.vim
+!.config/
+.config/*
+!.config/nvim/
 !.vim/
-!.vim/*
 .DS_Store

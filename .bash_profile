@@ -15,7 +15,7 @@ alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
 
-source .bash_profile_secret
+source "/Users/daniel.zitzman/.bash_profile_secret"
 
 # current dir in iterm tab title
 if [ $ITERM_SESSION_ID ]; then

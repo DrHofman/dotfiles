@@ -3,7 +3,7 @@
 " So configuration for tmux.vim would go in modules/plugins/tmux.vim.vim
 
 Plug 'mhinz/vim-startify' "The fancy start screen for Vim.
-Plug 'prettier/vim-prettier', { 'do': 'npm install' } "A Vim plugin for Prettier
+Plug 'dense-analysis/ale' "Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
 Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
 Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plug 'SirVer/ultisnips' "UltiSnips - The ultimate snippet solution for Vim
