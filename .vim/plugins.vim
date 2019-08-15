@@ -2,7 +2,6 @@
 " Configuration goes in the appropriate modules/plugins/*.vim file.
 " So configuration for tmux.vim would go in modules/plugins/tmux.vim.vim
 
-Plug 'mhinz/vim-startify' "The fancy start screen for Vim.
 Plug 'dense-analysis/ale' "Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
 Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
 Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
@@ -26,7 +25,7 @@ Plug 'moll/vim-node'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/html5-syntax.vim'
 Plug 'othree/html5.vim'
-Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'isRuslan/vim-es6'
 Plug 'pearofducks/ansible-vim'

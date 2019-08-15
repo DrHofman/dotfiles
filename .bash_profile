@@ -15,6 +15,7 @@ alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
 
+alias gpm="npm list -g --depth 0"
 source "/Users/daniel.zitzman/.bash_profile_secret"
 
 # current dir in iterm tab title
