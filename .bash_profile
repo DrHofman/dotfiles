@@ -14,6 +14,7 @@ alias notes="cd /Users/daniel.zitzman/notes; nvim"
 alias vim=nvim
 alias vi=nvim
 alias lop="lsof -i -P -n | grep LISTEN"
+alias todo="cd /Users/daniel.zitzman/notes && nvim TODO.md"
 
 alias gpm="npm list -g --depth 0"
 source "/Users/daniel.zitzman/.bash_profile_secret"
@@ -33,10 +34,14 @@ export EDITOR=nvim
 
 # GIG related stuff
 alias g='cd ~/projects/gig'
-alias r='cd ~/projects/gig/rizk'
-alias bo='cd ~/projects/gig/rizk-bo'
-alias d='cd ~/projects/gig/devenv-vagrant'
+alias ra='cd ~/projects/gig/rizk-aws'
 
+# Open project
+alias r='cd ~/projects/gig/rizk && vim'
+alias ar='cd ~/projects/gig/rizk-ansible && vim'
+alias bo='cd ~/projects/gig/rizk-bo && vim'
+alias d='cd ~/projects/gig/devenv-vagrant && vim'
+alias es='cd ~/projects/gig/rizk-aws/rizk-elasticsearch && vim'
 
 export PATH="$PATH:/Applications/Muse"
 
