@@ -15,6 +15,9 @@ endfunction
 
 nnoremap <silent> <leader>/c :call <SID>count_search_results()<CR>
 
+" Clear search results
+nnoremap <F3> :nohlsearch<CR><C-L>
+
 " Corrects the spelling under the cursor with the first suggestion.
 function! s:correct_to_first_spelling_suggestion()
   normal 1z=

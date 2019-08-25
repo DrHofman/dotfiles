@@ -47,3 +47,6 @@ set completeopt-=preview
 set sessionoptions=blank,curdir,folds,help,tabpages,winsize
 
 let g:deoplete#enable_at_startup = 1
+
+" Use the system clipboard
+set clipboard+=unnamedplus
