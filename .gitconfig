@@ -3,7 +3,7 @@
 	clean = git media clean %f
 	smudge = git media smudge %f
 [user]
-	name = Daniel Zitzman
+	name = Daniel
 	email = daniel.zitzman@gig.com
 [color]
 	ui = auto

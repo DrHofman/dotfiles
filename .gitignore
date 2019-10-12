@@ -2,7 +2,7 @@
 # User defined ignores
 # =========================
 /*
-!.bash_profile
+!.zshrc
 !.editorconfig
 !.gitattributes
 !.gitconfig

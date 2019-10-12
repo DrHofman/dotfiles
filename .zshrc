@@ -1,11 +1,18 @@
+# enable the default zsh completions!
+autoload -Uz compinit && compinit
+
 # Some sanity
+zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
+fpath=(~/.zsh $fpath)
 
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion #bash completion
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ls='ls -GwF'
+alias ll='ls -alh'
 
-alias ll='ls -la'
-alias lf='ls -F'
 alias vimrc='cd /Users/daniel.zitzman; nvim ~/.vim/plugins.vim'
-alias bashrc='nvim ~/.bash_profile'
+alias bashrc='nvim ~/.zshrc'
+alias gitconfig='nvim ~/.gitconfig'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
 alias dictionary="nvim /Users/danielzitzman/Library/Spelling/LocalDictionary"
@@ -21,7 +28,7 @@ source "/Users/daniel.zitzman/.bash_profile_secret"
 
 # current dir in iterm tab title
 if [ $ITERM_SESSION_ID ]; then
-  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
+  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND"
 fi
 
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
@@ -37,12 +44,7 @@ alias g='cd ~/projects/gig'
 alias ra='cd ~/projects/gig/rizk-aws'
 
 # Open project
-alias r='cd ~/projects/gig/rizk && vim'
-alias ar='cd ~/projects/gig/rizk-ansible && vim'
-alias bo='cd ~/projects/gig/rizk-bo && vim'
-alias d='cd ~/projects/gig/devenv-vagrant && vim'
-alias es='cd ~/projects/gig/rizk-aws/rizk-elasticsearch && vim'
-
-export PATH="$PATH:/Applications/Muse"
-
-export DYLD_FALLBACK_LIBRARY_PATH="$DYLD_FALLBACK_LIBRARY_PATH:/Applications/Muse"
+alias rd='cd ~/projects/gig/rizk'
+alias ra='cd ~/projects/gig/rizk-ansible'
+alias bo='cd ~/projects/gig/rizk-bo'
+alias es='cd ~/projects/gig/rizk-aws/rizk-elasticsearch'

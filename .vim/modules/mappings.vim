@@ -42,11 +42,6 @@ nnoremap <C-H> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-J> <C-W><C-H>
 
-" Pull from either side of a git conflict.
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gl :diffget LOCAL<CR>
-nnoremap <silent> <leader>gr :diffget REMOTE<CR>
-
 " Print out the current mappings.
 function! s:show_mappings()
   let path = Dot('mappings.sh')
