@@ -2,15 +2,11 @@
 " Configuration goes in the appropriate modules/plugins/*.vim file.
 " So configuration for tmux.vim would go in modules/plugins/tmux.vim.vim
 
-Plug 'dense-analysis/ale' "Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Intellisense engine for vim8 & neovim
 Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
-Plug 'Raimondi/delimitMate' "Provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plug 'SirVer/ultisnips' "UltiSnips - The ultimate snippet solution for Vim
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } "Dark powered asynchronous completion framework for neovim/Vim8
-Plug 'phpactor/phpactor' ,  {'do': 'composer install', 'for': 'php'} "PHP completion, refactoring and introspection tool
-Plug 'kristijanhusak/deoplete-phpactor' "Phpactor integration for deoplete.nvim
 Plug 'mbbill/undotree' "The ultimate undo history visualizer for VIM
-Plug 'airblade/vim-gitgutter' "A Vim plugin which shows a git diff in the gutter
+Plug 'mhinz/vim-signify' "Show a diff using Vim its sign column
 Plug 'ctrlpvim/ctrlp.vim' "Fuzzy file, buffer, mru, tag, etc finder
 " Plug 'morhetz/gruvbox'
 Plug 'editorconfig/editorconfig-vim' "EditorConfig plugin for Vim
@@ -20,7 +16,7 @@ Plug 'haya14busa/vim-asterisk' "asterisk.vim provides improved * motions
 Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'stephpy/vim-php-cs-fixer'
 Plug 'moll/vim-node'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/html5-syntax.vim'
@@ -42,12 +38,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-projectionist'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'liuchengxu/eleline.vim'
 Plug 'vim-scripts/applescript.vim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'mhinz/vim-nginx'
 Plug 'lumiliet/vim-twig' "Twig syntax highlighting, snipMate, etc.
 Plug 'vim-vdebug/vdebug' "Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
 Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
+" Plug 'juliosueiras/vim-terraform-completion'

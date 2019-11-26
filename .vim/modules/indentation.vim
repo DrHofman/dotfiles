@@ -1,4 +1,6 @@
 " ================ Indentation ======================
 
+set tabstop=2
+set shiftwidth=2
 set expandtab
-set colorcolumn=100
+set colorcolumn=80
