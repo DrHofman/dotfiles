@@ -11,6 +11,7 @@ alias ls='ls -GwF'
 alias ll='ls -alh'
 
 alias vimrc='cd /Users/daniel.zitzman && nvim .config/nvim/init.vim'
+alias vimplug='cd /Users/daniel.zitzman && sh vimplug.sh'
 alias bashrc='nvim ~/.zshrc'
 alias gitconfig='nvim ~/.gitconfig'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
