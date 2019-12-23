@@ -16,3 +16,12 @@
 !.config/nvim/
 !.vim/
 .DS_Store
+
+.netrwhist
+undo/
+spell/
+plugged/
+view/
+autoload/plug.vim
+autoload/plug.vim.old
+revert.sh
