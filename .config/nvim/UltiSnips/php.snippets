@@ -1,6 +1,49 @@
 # Snips #
 #########
 
-snippet vd "var_dump" w
+snippet this "$this->" w
+$this->
+endsnippet
+
+snippet dump "var_dump" w
 var_dump(${VISUAL}$0);
+exit;
+endsnippet
+
+priority -50
+
+snippet test "phpunit test class" b
+<?php
+
+namespace `!p
+relpath = os.path.relpath(path)
+m = re.search(r'[A-Z].+(?=/)', relpath)
+if m:
+	snip.rv = m.group().replace('/', '\\')
+`;
+
+use PHPUnit\Framework\TestCase;
+
+class `!p
+snip.rv = re.match(r'.*(?=\.)', fn).group()
+` extends TestCase
+{
+	public function test${1}()
+	{
+		${2}
+	}
+}
+endsnippet
+
+snippet expects "phpunit expects" i
+expects($this->${1:exactly}(${2}))
+	->method('${3}')
+	->with($this->equalTo(${4})${5})
+	->will($this->returnValue(${6}));
+endsnippet
+
+snippet testcmt "phpunit comment with group" b
+/**
+* @group ${1}
+*/
 endsnippet

@@ -54,3 +54,7 @@ alias es='cd ~/projects/gig/rizk-aws/rizk-elasticsearch'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Rizk Dev
+alias rizk-flushall='cd ~/projects/gig/rizk && vagrant --tags=flushall,rizk provision'
+alias rizk-tail='cd ~/projects/gig && tail -f rizk-app.log'

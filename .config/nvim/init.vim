@@ -63,7 +63,6 @@ call plug#end()
 set backspace=indent,eol,start
 set termguicolors
 set number "Set numbers display
-set relativenumber "Show numbers relative to current line
 set autoread "reload file on external change
 set laststatus=2 "always show a status line
 set showcmd "Show incomplete cmds down the bottom
@@ -231,8 +230,7 @@ nnoremap <C-J> <C-W><C-H>
 
 " Print out the current mappings.
 function! s:show_mappings()
-  let path = Dot('mappings.sh')
-  exec '!' . path
+  exec '!~/mappings.sh'
 endfunction
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -246,8 +244,7 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 nnoremap <silent> <leader><leader> :call <SID>show_mappings()<CR>
-nnoremap <silent> <leader>ff :ALEFix<CR>
-nnoremap <silent> <leader>cf :ALELint<CR>
+nnoremap <silent> <leader>ff :CocFix<CR>
 nnoremap <silent> <leader>av :AV<CR>
 
 " Quit
@@ -362,7 +359,7 @@ let g:php_cs_fixer_config = "default"                  " options: --config
 " End of php-cs-fixer version 1 config params
 
 " If you use php-cs-fixer version 2.x
-let g:php_cs_fixer_rules = "@PSR2"          " options: --rules (default:@PSR2)
+let g:php_cs_fixer_rules = "@PSR2,single_quote"          " options: --rules (default:@PSR2)
 "let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
 "let g:php_cs_fixer_config_file = '.php_cs' " options: --config
 " End of php-cs-fixer version 2 config params
