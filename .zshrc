@@ -16,7 +16,6 @@ alias bashrc='nvim ~/.zshrc'
 alias gitconfig='nvim ~/.gitconfig'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
-alias dictionary="nvim /Users/danielzitzman/Library/Spelling/LocalDictionary"
 alias vimsync="nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa"
 alias notes="cd /Users/daniel.zitzman/notes; nvim"
 alias vim=nvim

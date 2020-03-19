@@ -1,3 +1,24 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["json"]
+  "coc.preferences.formatOnSaveFiletypes": ["json", "javascript", "php"],
+  "languageserver": {
+    "terraform": {
+      "command": "/Users/daniel.zitzman/projects/.bin/terraform-lsp",
+      "filetypes": ["terraform"],
+      "initializationOptions": {}
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "intelephense": {
+      "command": "intelephense",
+      "args": ["--stdio"],
+      "filetypes": ["php"],
+      "initializationOptions": {
+          "storagePath": "/tmp/intelephense"
+      }
+    }
+  }
 }

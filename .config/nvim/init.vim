@@ -24,7 +24,6 @@ Plug 'haya14busa/vim-asterisk' "asterisk.vim provides improved * motions
 Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
-Plug 'stephpy/vim-php-cs-fixer'
 Plug 'moll/vim-node'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'othree/html5-syntax.vim'
@@ -53,7 +52,6 @@ Plug 'mhinz/vim-nginx'
 Plug 'lumiliet/vim-twig' "Twig syntax highlighting, snipMate, etc.
 Plug 'vim-vdebug/vdebug' "Multi-language DBGP debugger client for Vim (PHP, Python, Perl, Ruby, etc.)
 Plug 'hashivim/vim-terraform'
-Plug 'juliosueiras/vim-terraform-completion'
 
 call plug#end()
 
@@ -233,11 +231,6 @@ function! s:show_mappings()
   exec '!~/mappings.sh'
 endfunction
 
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 " incsearch key bindings
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -316,12 +309,14 @@ endif
 " ctrlpvim/ctrlp.vim
 " ----------------------------------------------------------------------------
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd = 'CtrlPMRU'
 
 if executable("ag")
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
 
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --ignore ''.git'' --ignore ''.DS_Store'' --ignore ''node_modules'' --ignore ''tests'' --hidden -g ""'
 endif
 
 " ----------------------------------------------------------------------------
@@ -345,94 +340,8 @@ autocmd BufReadPre *.js let b:javascript_lib_use_angularuirouter = 1
 autocmd BufReadPre *.js let b:javascript_lib_use_chai= 1
 
 " ----------------------------------------------------------------------------
-" stephpy/vim-php-cs-fixer
-" ----------------------------------------------------------------------------
-" If php-cs-fixer is in $PATH, you don't need to define line below
-" let g:php_cs_fixer_path = "~/php-cs-fixer.phar" " define the path to the php-cs-fixer.phar
-
-" If you use php-cs-fixer version 1.x
-let g:php_cs_fixer_level = "symfony"                   " options: --level (default:symfony)
-let g:php_cs_fixer_config = "default"                  " options: --config
-" If you want to define specific fixers:
-"let g:php_cs_fixer_fixers_list = "linefeed,short_tag" " options: --fixers
-"let g:php_cs_fixer_config_file = '.php_cs'            " options: --config-file
-" End of php-cs-fixer version 1 config params
-
-" If you use php-cs-fixer version 2.x
-let g:php_cs_fixer_rules = "@PSR2,single_quote"          " options: --rules (default:@PSR2)
-"let g:php_cs_fixer_cache = ".php_cs.cache" " options: --cache-file
-"let g:php_cs_fixer_config_file = '.php_cs' " options: --config
-" End of php-cs-fixer version 2 config params
-
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
-
-" ----------------------------------------------------------------------------
-" tpope/vim-projectionist
-" ----------------------------------------------------------------------------
-let g:projectionist_heuristics = {
-  \  "socket-server/lib/*.js": {
-  \    "socket-server/*.js": {
-  \      "alternate": ["tests/units/{}.js", "tests/{}.js"],
-  \      "type": "source"
-  \    },
-  \    "tests/units/*.js": {
-  \      "alternate": "socket-server/{}.js",
-  \      "type": "test"
-  \    }
-  \  },
-  \  "lib/*.js": {
-  \    "lib/*.js": {
-  \      "alternate": ["tests/units/{}.js", "tests/{}.js"],
-  \      "type": "source"
-  \    },
-  \    "tests/units/*.js": {
-  \      "alternate": "lib/{}.js",
-  \      "type": "test"
-  \    }
-  \  },
-  \  "src/app/*.js": {
-  \    "src/app/*.js": {
-  \      "alternate": ["tests/units/{}.js", "tests/{}.js"],
-  \      "type": "source"
-  \    },
-  \    "tests/units/*.js": {
-  \      "alternate": "src/app/{}.js",
-  \      "type": "test"
-  \    }
-  \  },
-  \  "*.js": {
-  \    "*.js": {
-  \      "alternate": ["tests/units/{}.js", "tests/{}.js"],
-  \      "type": "source"
-  \    },
-  \    "tests/units/*.js": {
-  \      "alternate": "{}.js",
-  \      "type": "test"
-  \    }
-  \  },
-  \  "*.php": {
-  \    "*.php": {
-  \      "alternate": ["tests/{}Test.php"],
-  \      "type": "source"
-  \    },
-  \    "tests/*Test.php": {
-  \      "alternate": "{}.php",
-  \      "type": "test"
-  \    }
-  \  },
-  \}
-
-" ----------------------------------------------------------------------------
 " SirVer/ultisnips
 " ----------------------------------------------------------------------------
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-l>"
-
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
