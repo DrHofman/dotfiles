@@ -49,6 +49,7 @@ alias rio='cd ~/projects/gig/rizk-io'
 alias rfe='cd ~/projects/gig/rizk-fe'
 alias rbo='cd ~/projects/gig/rizk-bo'
 alias ra='cd ~/projects/gig/rizk-ansible'
+alias rs='cd ~/projects/gig/rizk-secrets'
 alias es='cd ~/projects/gig/rizk-aws/rizk-elasticsearch'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
@@ -57,3 +58,8 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # Rizk Dev
 alias rizk-flushall='cd ~/projects/gig/rizk && vagrant --tags=flushall,rizk provision'
 alias rizk-tail='cd ~/projects/gig && tail -f rizk-app.log'
+
+precmd() {
+  # sets the tab title to current dir
+  echo -ne "\e]1;${PWD##*/}\a"
+}
