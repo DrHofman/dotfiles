@@ -2,7 +2,6 @@
 " Nvim init file
 " ============================================================================
 
-let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Set the leader key to SPACE
@@ -13,24 +12,20 @@ let mapleader="\<SPACE>"
 " ============================================================================
 call plug#begin(stdpath('data') . '/plugged')
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "Intellisense engine for vim8 & neovim
-Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
 Plug 'mbbill/undotree' "The ultimate undo history visualizer for VIM
 Plug 'mhinz/vim-signify' "Show a diff using Vim its sign column
 Plug 'morhetz/gruvbox'
-Plug 'ervandew/supertab' "Perform all your vim insert mode completions with Tab
 Plug 'elzr/vim-json'
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'junegunn/vim-xmark', { 'do': 'make' }
 Plug 'moll/vim-node'
 Plug 'othree/html5-syntax.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'isRuslan/vim-es6'
 Plug 'pearofducks/ansible-vim'
 Plug 'alunny/pegjs-vim'
 Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
@@ -45,6 +40,25 @@ Plug 'mhinz/vim-nginx'
 Plug 'lumiliet/vim-twig' "Twig syntax highlighting, snipMate, etc.
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-dadbod'
+Plug 'liuchengxu/graphviz.vim'
+
+Plug 'tpope/vim-commentary'
+" autocmd FileType  setlocal commentstring=#\ %s
+
+" Coc extensions
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Intellisense engine for vim8 & neovim
+
+" Graphql setup
+Plug 'jparise/vim-graphql'
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+Plug 'ludovicchabant/vim-gutentags' "A Vim plugin that manages your tag files
+let g:gutentags_exclude_project_root = [$HOME]
 
 Plug 'haya14busa/incsearch.vim' "Improved incremental searching for Vim
 map /  <Plug>(incsearch-forward)
@@ -57,7 +71,7 @@ nnoremap <silent> <leader>npd :Dispatch npm run dev<CR>
 nnoremap <silent> <leader>npb :Dispatch npm run build<CR>
 
 Plug 'mileszs/ack.vim'
-nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :A! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -84,13 +98,6 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 Plug 'liuchengxu/eleline.vim' "Another elegant statusline for vim
 let g:eleline_powerline_fonts = 1
 
-Plug 'othree/javascript-libraries-syntax.vim'
-autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
-autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
-autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
-autocmd BufReadPre *.js let b:javascript_lib_use_angularuirouter = 1
-autocmd BufReadPre *.js let b:javascript_lib_use_chai= 1
-
 Plug 'SirVer/ultisnips' "UltiSnips - The ultimate snippet solution for Vim
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
@@ -100,7 +107,7 @@ if !exists('g:vdebug_options')
     let g:vdebug_options = {}
 endif
 
-let g:vdebug_options.path_maps = {'/home/deploy/rizk':'/Users/daniel.zitzman/projects/gig/rizk'}
+let g:vdebug_options.path_maps = {'/home/deploy/rizk':$HOME . '/projects/betsson/rizk'}
 
 Plug 'haya14busa/vim-asterisk' "asterisk.vim provides improved * motions
 map *   <Plug>(asterisk-*)
@@ -147,11 +154,14 @@ let g:vim_search_pulse_disable_auto_mappings = 1
 let g:vim_search_pulse_color_list = ["red", "white"]
 let g:vim_search_pulse_duration = 200
 
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+
 call plug#end()
 
 " ============================================================================
 " Core settings
 " ============================================================================
+set title
 set backspace=indent,eol,start
 set termguicolors
 set number "Set numbers display
@@ -185,7 +195,7 @@ endif
 
 " ================ Theme ======================
 syntax on
-colorscheme gruvbox
+autocmd vimenter * colorscheme gruvbox
 set background=dark
 
 " ================ Folding ======================
@@ -278,6 +288,9 @@ set wildignore+=*.png,*.jpg,*.gif
 " Mappings
 " ============================================================================
 
+" Copied myfile.txt to myfile-copy.txt
+nnoremap <silent> <Leader>c :clear<bar>silent exec "!cp '%:p' '%:p:h/%:t:r-copy.%:e'"<bar>redraw<bar>echo "Copied " . expand('%:t') . ' to ' . expand('%:t:r') . '-copy.' . expand('%:e')<cr>
+
 " Replace word under cursor in file
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
@@ -302,8 +315,13 @@ nnoremap <silent> <leader>z :call <SID>correct_to_first_spelling_suggestion()<CR
 map <Esc><Esc> :w<CR>
 
 " Switch the motion keys so they will better fit the Colemak keyboard layout
-noremap k j
-noremap h k
+" Map line down to shift replace jump section
+noremap } j
+noremap { k
+
+" Jump one section with motion keys
+noremap k }
+noremap h {
 
 " Uses motion keys to switch tabs
 noremap j gT
@@ -314,6 +332,7 @@ nnoremap <C-K> <C-W><C-J>
 nnoremap <C-H> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-J> <C-W><C-H>
+nnoremap ; <C-W><C-W>
 
 " Print out the current mappings.
 function! s:show_mappings()

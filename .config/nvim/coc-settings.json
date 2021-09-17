@@ -1,8 +1,16 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["json", "javascript", "php"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "html",
+    "json",
+    "javascript",
+    "php",
+    "bash",
+    "sass",
+    "scss"
+  ],
   "languageserver": {
     "terraform": {
-      "command": "/Users/daniel.zitzman/projects/.bin/terraform-lsp",
+      "command": "/Users/dazi01/projects/.bin/terraform-lsp",
       "filetypes": ["terraform"],
       "initializationOptions": {}
     },
@@ -17,8 +25,11 @@
       "args": ["--stdio"],
       "filetypes": ["php"],
       "initializationOptions": {
-          "storagePath": "/tmp/intelephense"
+        "storagePath": "/tmp/intelephense"
       }
     }
-  }
+  },
+  "suggest.minTriggerInputLength": 2,
+  "suggest.noselect": false,
+  "javascript.suggestionActions.enabled": false
 }

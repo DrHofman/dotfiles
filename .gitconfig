@@ -2,9 +2,6 @@
 	required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
-[user]
-	name = Daniel
-	email = daniel.zitzman@gig.com
 [color]
 	ui = auto
 [alias]
@@ -17,7 +14,7 @@
 [push]
 	default = simple
 [core]
-	excludesfile = /Users/daniel.zitzman/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = nvim
 	autocrlf = input
 [url "https://"]
@@ -43,8 +40,11 @@
 	diff = (diff-so-fancy 2> /dev/null || cat) | less -R
 	show = (diff-so-fancy 2> /dev/null || cat) | less -R
 [commit]
-	template = /Users/daniel.zitzman/.stCommitMsg
+	template = ~/.stCommitMsg
 [diff]
 	tool = vimdiff
 [merge]
 	tool = vimdiff
+[user]
+	name = Daniel Zitzman
+	email = daniel.zitzman@betssongroup.com
