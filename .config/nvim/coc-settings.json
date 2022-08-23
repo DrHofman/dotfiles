@@ -3,16 +3,22 @@
     "html",
     "json",
     "javascript",
+    "terraform",
     "php",
     "bash",
     "sass",
-    "scss"
+    "scss",
+    "rust",
+    "dot",
+    "go"
   ],
   "languageserver": {
     "terraform": {
-      "command": "/Users/dazi01/projects/.bin/terraform-lsp",
-      "filetypes": ["terraform"],
-      "initializationOptions": {}
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
     },
     "bash": {
       "command": "bash-language-server",

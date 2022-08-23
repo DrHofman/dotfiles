@@ -36,17 +36,47 @@ Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-characterize'
 Plug 'junegunn/gv.vim'
 Plug 'vim-scripts/applescript.vim'
-Plug 'mhinz/vim-nginx'
 Plug 'lumiliet/vim-twig' "Twig syntax highlighting, snipMate, etc.
 Plug 'hashivim/vim-terraform'
 Plug 'tpope/vim-dadbod'
 Plug 'liuchengxu/graphviz.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'jbyuki/venn.nvim'
 
 Plug 'tpope/vim-commentary'
 " autocmd FileType  setlocal commentstring=#\ %s
 
 " Coc extensions
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Intellisense engine for vim8 & neovim
+
+let g:coc_global_extensions = [
+      \'coc-css',
+      \'coc-cssmodules',
+      \'coc-eslint',
+      \'coc-flutter',
+      \'coc-go',
+      \'coc-highlight',
+      \'coc-html',
+      \'coc-json',
+      \'coc-markdownlint',
+      \'coc-pairs',
+      \'coc-prettier',
+      \'coc-python',
+      \'coc-rls',
+      \'coc-sh',
+      \'coc-snippets',
+      \'coc-tabnine',
+      \'coc-tsserver',
+      \'coc-vetur',
+      \'coc-yaml',
+      \]
+
+
+"Dart/Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 " Graphql setup
 Plug 'jparise/vim-graphql'
@@ -125,14 +155,14 @@ let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
 
 Plug 'tpope/vim-fugitive'
-nnoremap <silent> <leader>gs :<C-u>Gstatus<CR>
+nnoremap <silent> <leader>g :<C-u>Git<CR>
 nnoremap <silent> <leader>gw :<C-u>Gwrite<CR>
 nnoremap <silent> <leader>gc :<C-u>Gcommit<CR>
 nnoremap <silent> <leader>gb :<C-u>Gblame<CR>
 nnoremap <silent> <leader>gd :<C-u>Gdiff<CR>
-nnoremap <silent> <leader>gj :<C-u>Gpull<CR>
-nnoremap <silent> <leader>gk :<C-u>Gpush<CR>
-nnoremap <silent> <leader>gf :<C-u>Gfetch<CR>
+nnoremap <silent> <leader>gj :<C-u>Git pull<CR>
+nnoremap <silent> <leader>gk :<C-u>Git push<CR>
+nnoremap <silent> <leader>gf :<C-u>Git fetch<CR>
 
 Plug 'nathanaelkane/vim-indent-guides'
 nnoremap <silent> <leader>ti :IndentGuidesToggle<CR>
@@ -199,8 +229,8 @@ autocmd vimenter * colorscheme gruvbox
 set background=dark
 
 " ================ Folding ======================
-set foldmethod=manual
-set foldlevelstart=1
+set foldmethod=syntax
+set foldlevelstart=20
 
 " ================ Highlighting ======================
 set hlsearch "Highlight searches.
