@@ -17,6 +17,7 @@ alias vimplug="cd /Users/$USER && sh vimplug.sh"
 alias bashrc='nvim ~/.zshrc'
 alias gitconfig='nvim ~/.gitconfig'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
+alias gcm="git checkout main; git pull origin main; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias mclean="git checkout main; git pull origin main; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
 alias vimsync="nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa"
@@ -74,3 +75,7 @@ source "$HOME/.ops/scripts/bash_completion.sh"
 # bun
 export BUN_INSTALL="/Users/dazi01/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# GOPATH for go Development
+export GOPATH=$HOME/go
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.1.0/bin:$PATH"
