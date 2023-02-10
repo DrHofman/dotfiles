@@ -2,9 +2,6 @@ local keymap = vim.api.nvim_set_keymap
 
 local opts = { noremap = true, silent = true }
 
--- save file
-keymap('n', '<Esc><Esc>', ':w<CR>', { noremap = true })
-
 -- Replace word under cursor in file
 keymap('n', '<Leader>s', ':%s/<C-r><C-w>//g<Left><Left>', { noremap = true })
 
@@ -50,6 +47,12 @@ keymap('n', '<leader>gf', '<C-u>Git fetch<CR>', opts)
 
 -- projectionist remap
 keymap('n', '<leader>av', ':AV<CR>', opts)
+
+-- save file
+vim.keymap.set('n', '<Esc><Esc>', function()
+  vim.lsp.buf.format()
+  vim.cmd("write")
+end)
 
 -- Copy a file
 vim.keymap.set('n', '<Leader>c', function()

@@ -15,13 +15,13 @@ lsp.ensure_installed({
 
 -- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        },
-    }
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    },
+  }
 })
 
 -- lsp.configure('solargraph', {
@@ -34,18 +34,13 @@ lsp.configure('sumneko_lua', {
 -- })
 
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-y>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
-
--- disable completion with tab
--- this helps with copilot setup
--- cmp_mappings['<Tab>'] = nil
--- cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings
@@ -62,7 +57,7 @@ lsp.set_preferences({
 })
 
 lsp.on_attach(function(client, bufnr)
-  local opts = {buffer = bufnr, remap = false}
+  local opts = { buffer = bufnr, remap = false }
 
   print('Language server attached')
   vim.o.formatoptions = "jcql"
@@ -83,11 +78,10 @@ end)
 -- Set up lspconfig
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-require('lspconfig')['solargraph'].setup  { capabilities = capabilities }
-require('lspconfig')['eslint'].setup        { capabilities = capabilities }
-require('lspconfig')['sumneko_lua'].setup       { capabilities = capabilities }
-require('lspconfig')['tsserver'].setup    { capabilities = capabilities }
-require('lspconfig')['eslint'].setup      { capabilities = capabilities }
+require('lspconfig')['solargraph'].setup { capabilities = capabilities }
+require('lspconfig')['sumneko_lua'].setup { capabilities = capabilities }
+require('lspconfig')['tsserver'].setup { capabilities = capabilities }
+require('lspconfig')['eslint'].setup { capabilities = capabilities }
 require('lspconfig')['marksman'].setup { capabilities = capabilities }
 require('lspconfig')['dockerls'].setup { capabilities = capabilities }
 require('lspconfig')['bashls'].setup { capabilities = capabilities }

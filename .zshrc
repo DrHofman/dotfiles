@@ -79,3 +79,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # GOPATH for go Development
 export GOPATH=$HOME/go
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.1.0/bin:$PATH"
+
+PATH="/Users/dazi01/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/dazi01/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/dazi01/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/dazi01/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/dazi01/perl5"; export PERL_MM_OPT;

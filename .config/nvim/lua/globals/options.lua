@@ -24,7 +24,6 @@ vim.opt.linebreak = true -- Wrap lines at convenient points
 vim.opt.list = true -- Enable listchars
 vim.opt.pumheight = 15 -- Maximum number of entries in autocomplete popup
 vim.opt.tagcase = "smart" -- Use smarcase for tags
-vim.opt.synmaxcol = 300 -- Use syntax highlighting only for 300 columns
 vim.opt.shortmess:append("c")
 vim.opt.binary = true -- Write files as they are, don't mess with line endings etc.
 vim.opt.completeopt:append("preview") -- Disable the completion preview window.
@@ -32,9 +31,21 @@ vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,winsize" -- Make sess
 vim.opt.clipboard:append("unnamedplus") -- Use the system clipboard
 vim.opt.virtualedit = "block"
 
+-- ================ Memory, CPU ================
+vim.opt.hidden = true -- Enable background buffers
+vim.opt.history = 100 -- Remember N lines in history
+vim.opt.lazyredraw = true -- Faster scrolling
+vim.opt.synmaxcol = 300 -- Max column for syntax highlight
+vim.opt.updatetime = 200 -- ms to wait for trigger an event
+
 -- ================ Folding ======================
-vim.opt.foldmethod = "syntax"
-vim.opt.foldlevelstart = 20
+vim.opt.foldnestmax = 4
+vim.opt.foldlevel = 1
+vim.opt.foldcolumn = "1"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 
 -- ================ Highlighting ======================
 vim.opt.hlsearch = true -- Highlight searches.
@@ -102,4 +113,9 @@ vim.opt.wildignore:append("*.png,*.jpg,*.gif")
 vim.g.UltiSnipsEditSplit = "vertical"
 vim.g.UltiSnipsSnippetsDir = "~/.nvim/UltiSnips"
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = { "*" },
+--   command = "lua vim.lsp.buf.format()",
+-- })

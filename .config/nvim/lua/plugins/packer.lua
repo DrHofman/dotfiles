@@ -23,8 +23,6 @@ return require('packer').startup(function(use)
   vim.o.background = "dark" -- or "light" for light mode
   vim.cmd([[colorscheme gruvbox]])
 
-  -- lightline
-  use 'itchyny/lightline.vim' -- A light and configurable statusline
   use 'SirVer/ultisnips' -- UltiSnips is the ultimate solution for snippets in Vim
   use 'alunny/pegjs-vim' -- Syntax highlighting for PEGjs files in VIM - https://pegjs.org
   use 'github/copilot.vim'
@@ -50,6 +48,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-vinegar'
   use 'sheerun/vim-polyglot' -- A collection of language packs for Vim
+  use 'elzr/vim-json' -- Better JSON for VIM
+
+  use {
+    'nvim-lualine/lualine.nvim', -- A blazing fast Neovim statusline
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
 
   -- Dart/Flutter
   use 'dart-lang/dart-vim-plugin'
@@ -59,6 +63,22 @@ return require('packer').startup(function(use)
 
   -- Graphql setup
   use 'jparise/vim-graphql'
+
+
+  -- A super powerful autopair plugin for Neovim that supports multiple characters
+  use {
+    'codota/tabnine-nvim',
+    run = "./dl_binaries.sh",
+    config = function() require('tabnine').setup({
+        disable_auto_comment = true,
+        accept_keymap = "<Tab>",
+        dismiss_keymap = "<C-]>",
+        debounce_ms = 300,
+        suggestion_color = { gui = "#808080", cterm = 244 },
+        execlude_filetypes = { "TelescopePrompt" }
+      })
+    end
+  }
 
   -- A super powerful autopair plugin for Neovim that supports multiple characters
   use {
@@ -77,8 +97,7 @@ return require('packer').startup(function(use)
     end,
   })
 
-  use('editorconfig/editorconfig-vim') -- EditorConfig plugin for Vim
-  vim.g.EditorConfig_exclude_patterns = [['fugitive://.*', 'scp://.*']]
+  use('gpanders/editorconfig.nvim') -- EditorConfig plugin for Vim
 
   use('nathanaelkane/vim-indent-guides')
   vim.g.indent_guides_enable_on_vim_startup = 1

@@ -120,10 +120,10 @@ _G.packer_plugins = {
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/dart-vim-plugin",
     url = "https://github.com/dart-lang/dart-vim-plugin"
   },
-  ["editorconfig-vim"] = {
+  ["editorconfig.nvim"] = {
     loaded = true,
-    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
-    url = "https://github.com/editorconfig/editorconfig-vim"
+    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/editorconfig.nvim",
+    url = "https://github.com/gpanders/editorconfig.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -150,15 +150,15 @@ _G.packer_plugins = {
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/gv.vim",
     url = "https://github.com/junegunn/gv.vim"
   },
-  ["lightline.vim"] = {
-    loaded = true,
-    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/lightline.vim",
-    url = "https://github.com/itchyny/lightline.vim"
-  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
+  },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -191,6 +191,12 @@ _G.packer_plugins = {
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-web-devicons"] = {
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -210,6 +216,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/rust.vim",
     url = "https://github.com/rust-lang/rust.vim"
+  },
+  ["tabnine-nvim"] = {
+    config = { "\27LJ\2\nê\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\23execlude_filetypes\1\2\0\0\20TelescopePrompt\21suggestion_color\1\0\2\bgui\f#808080\ncterm\3ô\1\1\0\4\16debounce_ms\3¬\2\19dismiss_keymap\n<C-]>\18accept_keymap\n<Tab>\25disable_auto_comment\2\nsetup\ftabnine\frequire\0" },
+    loaded = true,
+    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/tabnine-nvim",
+    url = "https://github.com/codota/tabnine-nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -265,6 +277,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/vim-indent-guides",
     url = "https://github.com/nathanaelkane/vim-indent-guides"
+  },
+  ["vim-json"] = {
+    loaded = true,
+    path = "/Users/dazi01/.local/share/nvim/site/pack/packer/start/vim-json",
+    url = "https://github.com/elzr/vim-json"
   },
   ["vim-lsc"] = {
     loaded = true,
@@ -339,14 +356,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: auto-save.nvim
-time([[Config for auto-save.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14auto-save\frequire\0", "config", "auto-save.nvim")
-time([[Config for auto-save.nvim]], false)
+-- Config for: tabnine-nvim
+time([[Config for tabnine-nvim]], true)
+try_loadstring("\27LJ\2\nê\1\0\0\4\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\6\0=\3\a\2B\0\2\1K\0\1\0\23execlude_filetypes\1\2\0\0\20TelescopePrompt\21suggestion_color\1\0\2\bgui\f#808080\ncterm\3ô\1\1\0\4\16debounce_ms\3¬\2\19dismiss_keymap\n<C-]>\18accept_keymap\n<Tab>\25disable_auto_comment\2\nsetup\ftabnine\frequire\0", "config", "tabnine-nvim")
+time([[Config for tabnine-nvim]], false)
 -- Config for: nvim-autopairs
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
+-- Config for: auto-save.nvim
+time([[Config for auto-save.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14auto-save\frequire\0", "config", "auto-save.nvim")
+time([[Config for auto-save.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
