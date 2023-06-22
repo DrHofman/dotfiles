@@ -12,7 +12,7 @@ alias ...='cd ../..'
 alias ls='ls -GwF'
 alias ll='ls -alh'
 
-alias vimrc="cd /Users/$USER && nvim .config/nvim/init.vim"
+alias vimrc="cd /Users/$USER && nvim .config/nvim/init.lua"
 alias vimplug="cd /Users/$USER && sh vimplug.sh"
 alias bashrc='nvim ~/.zshrc'
 alias gitconfig='nvim ~/.gitconfig'
