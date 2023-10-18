@@ -262,12 +262,12 @@ require("lazy").setup({
     end
   },
 
-  {
-    -- Local plugin path
-    dir = '~/projects/neovim-gpt-agents',
-    config = function()
-    end
-  },
+  -- {
+  --   -- Local plugin path
+  --   dir = '~/projects/neovim-gpt-agents',
+  --   config = function()
+  --   end
+  -- },
 
   { -- The ultimate undo history visualizer for VIM
     'mbbill/undotree',
@@ -289,6 +289,7 @@ require("lazy").setup({
   'tpope/vim-surround',
   'tpope/vim-unimpaired',
   'tpope/vim-vinegar',
+  'liuchengxu/graphviz.vim',
 
   {
     'lewis6991/gitsigns.nvim',
