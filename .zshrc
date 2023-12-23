@@ -43,6 +43,7 @@ export PATH="/usr/local/sbin:~/.composer/vendor/bin/:$PATH"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export EDITOR=nvim
+export WORKSPACE_PATH=/Users/dazi01/projects/betsson
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
