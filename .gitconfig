@@ -48,3 +48,5 @@
 [user]
 	name = Daniel Zitzman
 	email = daniel.zitzman@betssongroup.com
+[rerere]
+	enabled = true

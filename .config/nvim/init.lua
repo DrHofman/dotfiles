@@ -9,7 +9,6 @@ vim.g.filetype = "on"
 -- Core settings
 -- ============================================================================
 vim.opt.title = true
-vim.opt.syntax.on = true
 vim.opt.backspace = [[indent,eol,start]]
 vim.opt.termguicolors = true
 vim.opt.number = true                                               -- Set numbers display
@@ -21,16 +20,12 @@ vim.opt.splitbelow = true                                           -- More natu
 vim.opt.splitright = true                                           -- More natural splitting
 vim.opt.wrap = true                                                 -- Enable word wrap
 vim.opt.linebreak = true                                            -- Wrap lines at convenient points
--- vim.opt.listchars = [[tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…]]  -- Set trails for tabs and spaces
 vim.opt.list = true                                                 -- Enable listchars
 vim.opt.pumheight = 15                                              -- Maximum number of entries in autocomplete popup
 vim.opt.tagcase = "smart"                                           -- Use smarcase for tags
 vim.opt.shortmess:append("c")
-vim.opt.binary = true                                               -- Write files as they are, don't mess with line endings etc.
-vim.opt.completeopt:append("preview")                               -- Disable the completion preview window.
 vim.opt.sessionoptions = "blank,curdir,folds,help,tabpages,winsize" -- Make session files minimal
 vim.opt.clipboard:append("unnamedplus")                             -- Use the system clipboard
-vim.opt.virtualedit = "block"
 
 -- ================ Memory, CPU ================
 vim.opt.hidden = true     -- Enable background buffers
@@ -38,6 +33,7 @@ vim.opt.history = 100     -- Remember N lines in history
 vim.opt.lazyredraw = true -- Faster scrolling
 vim.opt.synmaxcol = 300   -- Max column for syntax highlight
 vim.opt.updatetime = 200  -- ms to wait for trigger an event
+vim.loader.enable()       -- Use nvim 0.9+ new loader with byte-compilation cache
 
 -- ================ Folding ======================
 vim.opt.foldnestmax = 4
@@ -71,7 +67,6 @@ end
 vim.g.netrw_hide = 0
 vim.g.netrw_liststyle = 0
 vim.opt.ttyfast = true
-vim.opt.lazyredraw = true -- Stops macros rendering every step.
 
 -- ================ Scrolling ========================
 vim.opt.scrolloff = 8 -- Start scrolling when we're 8 lines away from margins
@@ -114,17 +109,10 @@ vim.opt.wildignore:append("*.png,*.jpg,*.gif")
 vim.g.UltiSnipsEditSplit = "vertical"
 vim.g.UltiSnipsSnippetsDir = "~/.nvim/UltiSnips"
 
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
---   pattern = { "*" },
---   command = "lua vim.lsp.buf.format()",
--- })
-
 -- Remaps
 local keymap = vim.api.nvim_set_keymap
 
-local opts = { noremap = true, silent = true }
+local local_opts = { noremap = true, silent = true }
 
 -- Replace word under cursor in file
 keymap('n', '<Leader>s', ':%s/<C-r><C-w>//g<Left><Left>', { noremap = true })
@@ -162,15 +150,15 @@ keymap('n', 'Q', ':qa!<cr>', { noremap = true })
 keymap('n', '<F3>', ':nohlsearch<CR><C-L>', { noremap = true })
 
 -- 'tpope/vim-fugitive'
-keymap('n', '<leader>g', '<C-u>Git<CR>', opts)
-keymap('n', '<leader>gc', '<C-u>Gcommit<CR>', opts)
-keymap('n', '<leader>gb', '<C-u>Git blame<CR>', opts)
-keymap('n', '<leader>gj', '<C-u>Git pull<CR>', opts)
-keymap('n', '<leader>gk', '<C-u>Git push<CR>', opts)
-keymap('n', '<leader>gf', '<C-u>Git fetch<CR>', opts)
+keymap('n', '<leader>g', '<C-u>Git<CR>', local_opts)
+keymap('n', '<leader>gc', '<C-u>Gcommit<CR>', local_opts)
+keymap('n', '<leader>gb', '<C-u>Git blame<CR>', local_opts)
+keymap('n', '<leader>gj', '<C-u>Git pull<CR>', local_opts)
+keymap('n', '<leader>gk', '<C-u>Git push<CR>', local_opts)
+keymap('n', '<leader>gf', '<C-u>Git fetch<CR>', local_opts)
 
 -- projectionist remap
-keymap('n', '<leader>av', ':AV<CR>', opts)
+keymap('n', '<leader>av', ':AV<CR>', local_opts)
 
 -- save file
 vim.keymap.set('n', '<Esc><Esc>', function()
@@ -192,8 +180,8 @@ vim.keymap.set('n', '<Leader>z', function()
 end)
 
 --  Quick session bindings.
-keymap('n', '<leader>st', ':mksession! .quicksave.vim<CR>:echo "Session saved."<CR>', opts)
-keymap('n', '<leader>sr', ':source .quicksave.vim<CR>:echo "Session loaded."<CR>', opts)
+keymap('n', '<leader>st', ':mksession! .quicksave.vim<CR>:echo "Session saved."<CR>', local_opts)
+keymap('n', '<leader>sr', ':source .quicksave.vim<CR>:echo "Session loaded."<CR>', local_opts)
 
 vim.keymap.set('n', '<leader>dU', function()
   vim.ui.select({ 'yes', 'no' }, { prompt = "Clear undo information?" }, function(choice)
@@ -220,31 +208,39 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Example using a list of specs with the default options
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-  {
+  { -- displays a popup with possible key bindings
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
+    opts = {}
   },
 
-  { "folke/neoconf.nvim",      cmd = "Neoconf" },
-  "folke/neodev.nvim",
-  { "lewis6991/impatient.nvim" },
-  { "nathom/filetype.nvim" },
+  { -- Supercharge your Rust experience
+    'mrcjkb/rustaceanvim',
+    version = '^3',
+    ft = { 'rust' },
+  },
+
+  { -- Neovim setup for init.lua and plugin development
+    "folke/neodev.nvim",
+    opts = {},
+    config = function()
+      require("neodev").setup({})
+    end
+  },
+
+  { -- Smart and Powerful commenting
+    'numToStr/Comment.nvim',
+    opts = {},
+    lazy = false,
+  },
 
   'tpope/vim-characterize',
-  'tpope/vim-commentary',
   {
     'tpope/vim-fugitive',
     config = function()
@@ -349,7 +345,7 @@ require("lazy").setup({
     end
   },
 
-  {
+  { -- gruvbox colorscheme
     "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
@@ -418,88 +414,59 @@ require("lazy").setup({
     end
   },
 
-  {
+  { -- Treesitter configurations and abstraction layer
     "nvim-treesitter/nvim-treesitter",
     version = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSUpdateSync" },
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-          local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
-          local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-          local enabled = false
-          if opts.textobjects then
-            for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod] and opts.textobjects[mod].enable then
-                enabled = true
-                break
-              end
-            end
-          end
-          if not enabled then
-            require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-          end
-        end,
-      },
-    },
-    keys = {
-      { "<c-space>", desc = "Increment selection" },
-      { "<bs>",      desc = "Decrement selection", mode = "x" },
-    },
-    ---@type TSConfig
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
-        "bash",
-        "c",
-        "html",
-        "javascript",
-        "json",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "regex",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "yaml",
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        -- A list of parser names
+        ensure_installed = {
+          "bash",
+          "c",
+          "html",
+          "javascript",
+          "json",
+          "lua",
+          "luadoc",
+          "luap",
+          "markdown",
+          "markdown_inline",
+          "python",
+          "query",
+          "regex",
+          "tsx",
+          "typescript",
+          "vim",
+          "vimdoc",
+          "yaml",
         },
-      },
-    },
-    ---@param opts TSConfig
-    config = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        ---@type table<string, boolean>
-        local added = {}
-        opts.ensure_installed = vim.tbl_filter(function(lang)
-          if added[lang] then
-            return false
-          end
-          added[lang] = true
-          return true
-        end, opts.ensure_installed)
-      end
-      require("nvim-treesitter.configs").setup(opts)
-    end,
 
+        sync_install = false,
+        auto_install = true,
+
+        highlight = {
+          enable = true,
+
+          disable = {},
+          disable = function(lang, buf)
+            local max_filesize = 100 * 1024 -- 100 KB
+            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+            if ok and stats and stats.size > max_filesize then
+              return true
+            end
+          end,
+
+          additional_vim_regex_highlighting = false,
+        },
+      }
+    end,
+  },
+
+  { -- DAP (Debug Adapter Protocol)
+    'mfussenegger/nvim-dap'
   },
 
   { -- LSP
@@ -527,37 +494,66 @@ require("lazy").setup({
       local lsp = require('lsp-zero')
       lsp.preset('recommended')
 
-      lsp.ensure_installed({
-        'tsserver',
-        'eslint',
-        'lua_ls',
-        'solargraph',
-        'marksman',
-        'dockerls',
-        'bashls',
+      require('mason').setup({})
+      require('mason-lspconfig').setup({
+        -- Replace the language servers listed here
+        -- with the ones you want to install
+        ensure_installed = {
+          'tsserver',
+          'eslint',
+          'lua_ls',
+          'solargraph',
+          'marksman',
+          'dockerls',
+          'bashls',
+        },
       })
 
-      local cmp = require('cmp')
-      local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      })
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
 
-      lsp.setup_nvim_cmp({
-        mapping = cmp_mappings
-      })
+      local luasnip = require("luasnip")
+      local cmp = require("cmp")
 
-      lsp.set_preferences({
-        suggest_lsp_servers = false,
-        sign_icons = {
-          error = 'E',
-          warn = 'W',
-          hint = 'H',
-          info = 'I'
-        }
+      cmp.setup({
+        mapping = {
+          ["<CR>"] = cmp.mapping({
+            i = function(fallback)
+              if cmp.visible() and cmp.get_active_entry() then
+                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+              else
+                fallback()
+              end
+            end,
+            s = cmp.mapping.confirm({ select = true }),
+            c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+          }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+              -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+              -- that way you will only jump inside the snippet region
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
       })
 
       lsp.on_attach(function(client, bufnr)
@@ -597,7 +593,16 @@ require("lazy").setup({
       require('lspconfig')['bashls'].setup { capabilities = capabilities }
 
       lsp.setup()
+
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        update_in_insert = false,
+        underline = true,
+        severity_sort = false,
+        float = true,
+      })
     end
-  },
+  }
 
 })
