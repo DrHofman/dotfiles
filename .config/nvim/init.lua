@@ -503,6 +503,7 @@ require("lazy").setup({
           'eslint',
           'lua_ls',
           'solargraph',
+          'intelephense',
           'marksman',
           'dockerls',
           'bashls',
@@ -576,6 +577,7 @@ require("lazy").setup({
       -- Set up lspconfig
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+      require('lspconfig')['intelephense'].setup { capabilities = capabilities }
       require('lspconfig')['solargraph'].setup { capabilities = capabilities }
       require('lspconfig')['lua_ls'].setup {
         capabilities = capabilities,
