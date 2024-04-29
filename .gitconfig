@@ -13,6 +13,7 @@
 	prune-branches = "!git branch --merged | grep -Ev '^\\*|  master$' | xargs git branch --delete"
 [push]
 	default = simple
+	autoSetupRemote = true
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = nvim
