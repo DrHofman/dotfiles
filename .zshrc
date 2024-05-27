@@ -3,7 +3,7 @@ export PATH="$PATH:/Users/dazi01/projects/betsson/wor/flutter/bin"
 
 ZSH_THEME="simple"
 
-plugins=(git ansible macos redis-cli vagrant web-search)
+plugins=(git macos redis-cli)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,3 +86,21 @@ PERL5LIB="/Users/dazi01/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5L
 PERL_LOCAL_LIB_ROOT="/Users/dazi01/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/dazi01/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/dazi01/perl5"; export PERL_MM_OPT;
+
+prompt_end_line() {
+  echo -n "\n"
+}
+
+# End the prompt, closing any open segments
+prompt_end() {
+  echo -n "%{%k%}"
+  echo -n "%{%f%}"
+}
+
+## Main prompt
+build_prompt() {
+  prompt_end_line
+  prompt_end
+}
+
+PROMPT="$PROMPT$(build_prompt)$ "

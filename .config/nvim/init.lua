@@ -1,7 +1,6 @@
 -- ============================================================================
 -- Nvim init file
 -- ============================================================================
-
 vim.g.mapleader = " "
 vim.g.filetype = "on"
 
@@ -33,6 +32,7 @@ vim.opt.history = 100     -- Remember N lines in history
 vim.opt.lazyredraw = true -- Faster scrolling
 vim.opt.synmaxcol = 300   -- Max column for syntax highlight
 vim.opt.updatetime = 200  -- ms to wait for trigger an event
+vim.wo.signcolumn = 'yes'
 vim.loader.enable()       -- Use nvim 0.9+ new loader with byte-compilation cache
 
 -- ================ Folding ======================
@@ -78,6 +78,9 @@ vim.opt.sidescroll = 5
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
+-- Set completeopt to have a better completion experience
+vim.opt.completeopt = "menuone,noselect"
+
 -- ================ Spell checking ========================
 vim.opt.spelllang = "en_gb"
 vim.opt.spellfile = vim.fn.expand("$HOME/.nvim/spell/en.utf-8.add")
@@ -109,10 +112,24 @@ vim.opt.wildignore:append("*.png,*.jpg,*.gif")
 vim.g.UltiSnipsEditSplit = "vertical"
 vim.g.UltiSnipsSnippetsDir = "~/.nvim/UltiSnips"
 
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
 -- Remaps
 local keymap = vim.api.nvim_set_keymap
 
 local local_opts = { noremap = true, silent = true }
+
+keymap('n', '<leader>pa', ':cexpr system(\'vendor/bin/phpstan analyse --no-progress --error-format=raw\')<cr>',
+  { noremap = true })
 
 -- Replace word under cursor in file
 keymap('n', '<Leader>s', ':%s/<C-r><C-w>//g<Left><Left>', { noremap = true })
@@ -266,17 +283,17 @@ require("lazy").setup({
   -- },
 
   {
-    "robitx/gp.nvim",
+    dir = "~/projects/common/gp.nvim",
     config = function()
       require("gp").setup({
         openai_api_key = os.getenv("OPENAI_API_KEY"),
         agents = {
           {
-            name = "ChatGPT4",
+            name = "ChatGPT4o",
             chat = true,
             command = false,
             -- string with model name or table with model name and parameters
-            model = { model = "gpt-4-0125-preview", temperature = 1.1, top_p = 1 },
+            model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
             -- system prompt (use this to specify the persona/role of the AI)
             system_prompt = "You are a general AI assistant.\n\n"
                 .. "The user provided the additional info about how they would like you to respond:\n\n"
@@ -293,7 +310,7 @@ require("lazy").setup({
             chat = false,
             command = true,
             -- string with model name or table with model name and parameters
-            model = { model = "gpt-4-0125-preview", temperature = 0.8, top_p = 1 },
+            model = { model = "gpt-4o", temperature = 0.8, top_p = 1 },
             -- system prompt (use this to specify the persona/role of the AI)
             system_prompt =
                 "You are to operate as a specialized AI for editing and generating JavaScript code. When interacting with users, adhere strictly to the following guidelines to ensure your responses align with specified coding standards and preferences:\n\n"
@@ -399,6 +416,21 @@ require("lazy").setup({
     end,
   },
 
+  -- Database
+  'kristijanhusak/vim-dadbod-ui',
+  'kristijanhusak/vim-dadbod-completion',
+  {
+    "tpope/vim-dadbod",
+    opt = true,
+    requires = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    config = function()
+      require("config.dadbod").setup()
+    end,
+  },
+
   'gpanders/editorconfig.nvim', -- EditorConfig plugin for Vim
 
   {
@@ -484,12 +516,17 @@ require("lazy").setup({
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSUpdateSync" },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     config = function()
       require 'nvim-treesitter.configs'.setup {
+        modules = {},
         -- A list of parser names
         ensure_installed = {
           "bash",
           "c",
+          "css",
           "html",
           "javascript",
           "json",
@@ -501,11 +538,75 @@ require("lazy").setup({
           "python",
           "query",
           "regex",
+          "rust",
+          "sql",
+          "terraform",
           "tsx",
           "typescript",
           "vim",
           "vimdoc",
           "yaml",
+        },
+
+        ignore_install = {},
+        indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<c-space>',
+            node_incremental = '<c-space>',
+            scope_incremental = '<c-s>',
+            node_decremental = '<c-backspace>',
+          },
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+              ['ii'] = '@conditional.inner',
+              ['ai'] = '@conditional.outer',
+              ['il'] = '@loop.inner',
+              ['al'] = '@loop.outer',
+              ['at'] = '@comment.outer',
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              [']f'] = '@function.outer',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']F'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[f'] = '@function.outer',
+              ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[F'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>a'] = '@parameter.inner',
+            },
+            swap_previous = {
+              ['<leader>A'] = '@parameter.inner',
+            },
+          },
         },
 
         sync_install = false,
@@ -514,7 +615,6 @@ require("lazy").setup({
         highlight = {
           enable = true,
 
-          disable = {},
           disable = function(lang, buf)
             local max_filesize = 100 * 1024 -- 100 KB
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -669,6 +769,6 @@ require("lazy").setup({
         float = true,
       })
     end
-  }
+  },
 
 })

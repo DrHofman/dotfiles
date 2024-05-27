@@ -26,3 +26,4 @@ view/
 autoload/plug.vim
 autoload/plug.vim.old
 revert.sh
+.config/nvim/db_ui/
