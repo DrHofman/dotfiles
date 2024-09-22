@@ -47,6 +47,14 @@ require("lazy").setup({
   },
 
   {
+    'nvimdev/hlsearch.nvim',
+    event = 'BufRead',
+    config = function()
+      require('hlsearch').setup()
+    end
+  },
+
+  {
     'github/copilot.vim',
     config = function()
       vim.g.copilot_no_tab_map = true
@@ -62,6 +70,60 @@ require("lazy").setup({
   --   config = function()
   --   end
   -- },
+
+  {
+    "robitx/gp.nvim",
+    config = function()
+      local conf = {
+        -- For customization, refer to Install > Configuration in the Documentation/Readme
+        providers = {
+          openai = {
+            endpoint = "https://api.openai.com/v1/chat/completions",
+            secret = os.getenv("OPENAI_API_KEY"),
+          },
+
+          azure = {
+            disable = true,
+            endpoint = "https://$URL.openai.azure.com/openai/deployments/{{model}}/chat/completions",
+            secret = os.getenv("AZURE_API_KEY"),
+          },
+
+          copilot = {
+            disable = true,
+            endpoint = "https://api.githubcopilot.com/chat/completions",
+          },
+
+          pplx = {
+            disable = true,
+            endpoint = "https://api.perplexity.ai/chat/completions",
+            secret = os.getenv("PPLX_API_KEY"),
+          },
+
+          ollama = {
+            disable = true,
+            endpoint = "http://localhost:11434/v1/chat/completions",
+          },
+
+          googleai = {
+            disable = true,
+            endpoint =
+            "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
+            secret = os.getenv("GOOGLEAI_API_KEY"),
+          },
+
+          anthropic = {
+            disable = true,
+            endpoint = "https://api.anthropic.com/v1/messages",
+            secret = os.getenv("ANTHROPIC_API_KEY"),
+          },
+        },
+
+      }
+      require("gp").setup(conf)
+
+      -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+    end,
+  },
 
   { -- The ultimate undo history visualizer for VIM
     'mbbill/undotree',
@@ -365,7 +427,7 @@ require("lazy").setup({
 
         require('mason-lspconfig').setup({
           ensure_installed = {
-            'tsserver',
+            'ts_ls',
             'eslint',
             'lua_ls',
             'solargraph',
