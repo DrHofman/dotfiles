@@ -35,8 +35,6 @@ require("lazy").setup({
   { "folke/neoconf.nvim",      cmd = "Neoconf" },
   "folke/neodev.nvim",
   { "lewis6991/impatient.nvim" },
-  { "nathom/filetype.nvim" },
-
   'tpope/vim-characterize',
   'tpope/vim-commentary',
   {
