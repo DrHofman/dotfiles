@@ -32,11 +32,7 @@ require("lazy").setup({
     }
   },
 
-  { "folke/neoconf.nvim",      cmd = "Neoconf" },
-  "folke/neodev.nvim",
-  { "lewis6991/impatient.nvim" },
   'tpope/vim-characterize',
-  'tpope/vim-commentary',
   {
     'tpope/vim-fugitive',
     config = function()
@@ -137,7 +133,6 @@ require("lazy").setup({
 
   'tpope/vim-obsession',
   'tpope/vim-projectionist',
-  'tpope/vim-ragtag',
   'tpope/vim-repeat',
   'tpope/vim-sensible',
   'tpope/vim-surround',
@@ -395,29 +390,60 @@ require("lazy").setup({
       'hrsh7th/nvim-cmp',
       event = 'InsertEnter',
       dependencies = {
-        { 'L3MON4D3/LuaSnip' },
+        { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
       },
       config = function()
-        local cmp = require('cmp')
+        local luasnip = require("luasnip")
+        local cmp = require("cmp")
+
+        require("luasnip.loaders.from_vscode").lazy_load()
 
         cmp.setup({
           sources = {
             { name = 'nvim_lsp' },
+            { name = 'luasnip' },
           },
-          mapping = cmp.mapping.preset.insert({
-            ["<Tab>"] = cmp.mapping(function(fallback)
-              -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+          mapping = {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping(function(fallback)
               if cmp.visible() then
-                local entry = cmp.get_selected_entry()
-                if not entry then
-                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                if luasnip.expandable() then
+                  luasnip.expand()
+                else
+                  cmp.confirm({
+                    select = true,
+                  })
                 end
-                cmp.confirm()
               else
                 fallback()
               end
-            end, { "i", "s", "c", }),
-          }),
+            end),
+
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.locally_jumpable(1) then
+                luasnip.jump(1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.locally_jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          },
           snippet = {
             expand = function(args)
               vim.snippet.expand(args.body)
