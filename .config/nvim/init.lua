@@ -17,6 +17,46 @@ vim.opt.rtp:prepend(lazypath)
 -- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
+-- Close all hidden buffers
+function Wipeout()
+  local allBuffers = {}
+  local winBuffers = {}
+
+  local currentTab = vim.fn.tabpagenr()
+  local buflist = vim.api.nvim_list_bufs()
+  local num_tabs = vim.fn.tabpagenr('$') -- retrieve number of tab pages
+
+  for _, buf in ipairs(buflist) do
+    allBuffers[buf] = true
+  end
+
+  for i = 1, num_tabs do
+    local tab_bufs = vim.fn.tabpagebuflist(i)
+
+    for _, buf in ipairs(tab_bufs) do
+      table.insert(winBuffers, buf)
+    end
+  end
+
+  for _, buf in ipairs(winBuffers) do
+    allBuffers[buf] = nil
+  end
+
+  -- If there are buffers left, delete them
+  local buffersToClose = vim.tbl_keys(allBuffers)
+
+  if #buffersToClose > 0 then
+    vim.cmd('bwipeout ' .. table.concat(buffersToClose, ' '))
+    vim.cmd('echo ' .. table.concat(buffersToClose, ' '))
+  end
+
+  -- Go back to the original tab page
+  vim.cmd('tabNext ' .. currentTab)
+end
+
+-- Register the function so it can be called using :call Wipeout()
+vim.api.nvim_create_user_command('Wipeout', Wipeout, {})
+
 require("lazy").setup({
   {
     "folke/which-key.nvim",

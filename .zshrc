@@ -104,3 +104,4 @@ build_prompt() {
 }
 
 PROMPT="$PROMPT$(build_prompt)$ "
+export PATH="/usr/local/opt/openjdk/bin:$PATH"

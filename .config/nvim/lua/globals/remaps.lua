@@ -12,12 +12,10 @@ keymap('n', '<leader>nh', ':noh<cr>', { noremap = true })
 
 -- Switch the motion keys so they will better fit the Colemak keyboard layout
 -- Map line down to shift replace jump section
-keymap('n', '}', 'j', { noremap = true })
-keymap('n', '{', 'k', { noremap = true })
-
--- Jump one section with motion keys
-keymap('n', 'k', '}', { noremap = true })
-keymap('n', 'h', '{', { noremap = true })
+keymap('n', 'k', 'j', { noremap = true })
+keymap('v', 'k', 'j', { noremap = true })
+keymap('n', 'h', 'k', { noremap = true })
+keymap('v', 'h', 'k', { noremap = true })
 
 -- Uses motion keys to switch tabs
 keymap('n', 'j', 'gT', { noremap = true })
@@ -82,3 +80,10 @@ vim.keymap.set('n', '<leader>dU', function()
     end
   end)
 end)
+
+-- Disable arrow keys
+for _, mode in pairs({ 'n', 'v', 'x' }) do
+  for _, key in pairs({ '<Up>', '<Down>', '<Left>', '<Right>' }) do
+    vim.keymap.set(mode, key, '<nop>')
+  end
+end
