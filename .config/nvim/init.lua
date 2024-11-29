@@ -298,10 +298,15 @@ require("lazy").setup({
       local lga_actions = require("telescope-live-grep-args.actions")
 
       telescope.setup {
+        pickers = {
+          find_files = {
+            hidden = true,                                     -- Enable showing hidden files
+            file_ignore_patterns = { "%.git/", "%.DS_Store" }, -- Ignore files
+          },
+        },
         extensions = {
           live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting
-            -- define mappings, e.g.
             mappings = {         -- extend mappings
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
@@ -548,13 +553,51 @@ require("lazy").setup({
           }
         })
 
-        require('lspconfig').lua_ls.setup({
+        local prettier = {
+          formatCommand = "prettierd ${INPUT}",
+          formatStdin = true,
+          env = {
+            string.format("PRETTIERD_DEFAULT_CONFIG=%s",
+              vim.fn.expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
+          },
+        }
+
+        local lspconfig = require("lspconfig")
+
+        lspconfig.lua_ls.setup({
           settings = {
             Lua = {
               diagnostics = {
                 globals = { 'vim' }
               }
             }
+          }
+        })
+
+        lspconfig.efm.setup({
+          init_options = { documentFormatting = true },
+          settings = {
+            rootMarkers = { ".git/" },
+            languages = {
+              javascript = { prettier },
+              typescript = { prettier },
+              javascriptreact = { prettier },
+              typescriptreact = { prettier },
+              json = { prettier },
+              css = { prettier },
+              html = { prettier },
+              -- Add other languages here if needed
+            },
+          },
+          filetypes = {
+            "javascript",
+            "typescript",
+            "javascriptreact",
+            "typescriptreact",
+            "json",
+            "css",
+            "html"
+            -- Add other filetypes here if needed
           }
         })
       end

@@ -22,7 +22,7 @@ vim.opt.splitbelow = true -- More natural splitting
 vim.opt.splitright = true -- More natural splitting
 vim.opt.wrap = true -- Enable word wrap
 vim.opt.linebreak = true -- Wrap lines at convenient points
--- vim.opt.listchars = [[tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…]]  -- Set trails for tabs and spaces
+vim.opt.listchars = [[tab:▸ ,extends:❯,precedes:❮,nbsp:±,trail:…]] -- Set trails for tabs and spaces
 vim.opt.list = true -- Enable listchars
 vim.opt.pumheight = 15 -- Maximum number of entries in autocomplete popup
 vim.opt.tagcase = "smart" -- Use smarcase for tags
@@ -34,11 +34,11 @@ vim.opt.clipboard:append("unnamedplus") -- Use the system clipboard
 vim.opt.virtualedit = "block"
 
 -- ================ Memory, CPU ================
-vim.opt.hidden = true -- Enable background buffers
-vim.opt.history = 100 -- Remember N lines in history
+vim.opt.hidden = true     -- Enable background buffers
+vim.opt.history = 100     -- Remember N lines in history
 vim.opt.lazyredraw = true -- Faster scrolling
-vim.opt.synmaxcol = 300 -- Max column for syntax highlight
-vim.opt.updatetime = 200 -- ms to wait for trigger an event
+vim.opt.synmaxcol = 300   -- Max column for syntax highlight
+vim.opt.updatetime = 200  -- ms to wait for trigger an event
 
 -- ================ Folding ======================
 vim.opt.foldnestmax = 4
@@ -50,7 +50,7 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
 -- ================ Highlighting ======================
-vim.opt.hlsearch = true -- Highlight searches.
+vim.opt.hlsearch = true   -- Highlight searches.
 vim.opt.cursorline = true -- Highlight the current line.
 
 -- ================ Indentation ======================
@@ -64,7 +64,7 @@ vim.opt.colorcolumn = "80"
 
 -- ================ Mouse setup ======================
 if vim.fn.has('mouse') then
-  vim.opt.mouse = "a" -- enable mouse in several mode
+  vim.opt.mouse = "a"          -- enable mouse in several mode
   vim.opt.mousemodel = "popup" -- set the behaviour of mouse
 end
 
@@ -115,6 +115,7 @@ vim.opt.wildignore:append("*.png,*.jpg,*.gif")
 vim.g.UltiSnipsEditSplit = "vertical"
 vim.g.UltiSnipsSnippetsDir = "~/.nvim/UltiSnips"
 
+-- Automatically format on buffer Write disable for now, it's too slow
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- vim.api.nvim_create_autocmd("BufWritePre", {
