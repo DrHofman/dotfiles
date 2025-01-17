@@ -588,6 +588,7 @@ require("lazy").setup({
                 json = { prettier },
                 css = { prettier },
                 html = { prettier },
+                php = { prettier },
                 -- Add other languages here if needed
               },
             },
