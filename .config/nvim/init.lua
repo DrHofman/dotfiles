@@ -60,6 +60,26 @@ end
 -- Register the function so it can be called using :call Wipeout()
 vim.api.nvim_create_user_command('Wipeout', Wipeout, {})
 
+-- Map <leader>pa in normal mode to run PHPStan and set quickfix list
+vim.api.nvim_set_keymap(
+  'n',  -- normal mode
+  '<leader>paa',  -- key combination
+  [[:lua RunPHPStan()<CR>]],  -- Lua function
+  { noremap = true, silent = true }
+)
+
+-- Define the Lua function
+function RunPHPStan()
+  -- Execute the system command
+  local output = vim.fn.system('vendor/bin/phpstan analyse src/Rizk --no-progress --error-format=raw --memory-limit 512M')
+
+  -- Set the output to the quickfix list
+  vim.fn.setqflist({}, ' ', { title = 'PHPStan', lines = vim.split(output, '\n') })
+
+  -- Open the quickfix list
+  vim.cmd('copen')
+end
+
 require("lazy").setup({
   spec = {
     -- add plugins

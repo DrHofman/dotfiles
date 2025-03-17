@@ -17,7 +17,7 @@ alias vimplug="cd /Users/$USER && sh vimplug.sh"
 alias bashrc='nvim ~/.zshrc'
 alias gitconfig='nvim ~/.gitconfig'
 alias gclean="git checkout master; git pull origin master; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
-alias gcm="git checkout main; git pull origin main; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
+alias gcm="~/git-cleanup.sh"
 alias mclean="git checkout main; git pull origin main; git fetch --all -p; git branch -vv | grep \": gone]\" | awk '{ print \$1 }' | xargs -n 1 git branch -d"
 alias dns-reset="sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache"
 alias vimsync="nvim +PlugUpgrade +PlugClean! +PlugUpdate +qa"
@@ -105,3 +105,7 @@ build_prompt() {
 
 PROMPT="$PROMPT$(build_prompt)$ "
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/dazi01/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
