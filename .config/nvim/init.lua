@@ -62,16 +62,17 @@ vim.api.nvim_create_user_command('Wipeout', Wipeout, {})
 
 -- Map <leader>pa in normal mode to run PHPStan and set quickfix list
 vim.api.nvim_set_keymap(
-  'n',  -- normal mode
-  '<leader>paa',  -- key combination
-  [[:lua RunPHPStan()<CR>]],  -- Lua function
+  'n',                       -- normal mode
+  '<leader>paa',             -- key combination
+  [[:lua RunPHPStan()<CR>]], -- Lua function
   { noremap = true, silent = true }
 )
 
 -- Define the Lua function
 function RunPHPStan()
   -- Execute the system command
-  local output = vim.fn.system('vendor/bin/phpstan analyse src/Rizk --no-progress --error-format=raw --memory-limit 512M')
+  local output = vim.fn.system(
+    'vendor/bin/phpstan analyse src/Rizk --no-progress --error-format=raw --memory-limit 512M')
 
   -- Set the output to the quickfix list
   vim.fn.setqflist({}, ' ', { title = 'PHPStan', lines = vim.split(output, '\n') })
@@ -571,6 +572,16 @@ require("lazy").setup({
               -- it applies to every language server without a "custom handler"
               function(server_name)
                 require('lspconfig')[server_name].setup({})
+              end,
+              intelephense = function()
+                local stubs = require('config/intelephense')
+                require("lspconfig").intelephense.setup({
+                  settings = {
+                    intelephense = {
+                      stubs = stubs,
+                    },
+                  },
+                })
               end,
             }
           })
