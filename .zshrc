@@ -56,11 +56,6 @@ iterm_tab_title() {
 }
 add-zsh-hook precmd iterm_tab_title
 
-# >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/2.2.10/gems/vagrant-2.2.10/contrib/zsh $fpath)
-compinit
-# <<<<  Vagrant command completion (end)
-
 # ACME
 . "/Users/dazi01/.acme.sh/acme.sh.env"
 
@@ -87,23 +82,6 @@ PERL_LOCAL_LIB_ROOT="/Users/dazi01/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB
 PERL_MB_OPT="--install_base \"/Users/dazi01/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/dazi01/perl5"; export PERL_MM_OPT;
 
-prompt_end_line() {
-  echo -n "\n"
-}
-
-# End the prompt, closing any open segments
-prompt_end() {
-  echo -n "%{%k%}"
-  echo -n "%{%f%}"
-}
-
-## Main prompt
-build_prompt() {
-  prompt_end_line
-  prompt_end
-}
-
-PROMPT="$PROMPT$(build_prompt)$ "
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)

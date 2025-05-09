@@ -32,9 +32,6 @@ keymap('n', ';', '<C-W><C-W>', { noremap = true })
 keymap('n', '<Leader>q', ':q<cr>', { noremap = true })
 keymap('n', 'Q', ':qa!<cr>', { noremap = true })
 
--- Clear search results
-keymap('n', '<F3>', ':nohlsearch<CR><C-L>', { noremap = true })
-
 -- 'tpope/vim-fugitive'
 keymap('n', '<leader>g', '<C-u>Git<CR>', opts)
 keymap('n', '<leader>gc', '<C-u>Gcommit<CR>', opts)
