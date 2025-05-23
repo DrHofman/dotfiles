@@ -2,6 +2,7 @@ require('globals.options')
 require('globals.remaps')
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -15,9 +16,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
--- Example using a list of specs with the default options
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 -- Close all hidden buffers
@@ -83,22 +84,9 @@ end
 
 require("lazy").setup({
   spec = {
-    -- add plugins
-    {
-      "folke/which-key.nvim",
-      event = "VeryLazy",
-      init = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-      end,
-      opts = {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    },
+    { import = "plugins" },
 
-    'tpope/vim-characterize',
+    -- add plugins
     {
       'tpope/vim-fugitive',
       config = function()
@@ -122,67 +110,6 @@ require("lazy").setup({
         vim.api.nvim_set_keymap('i', '<C-S>', '<Plug>(copilot-next)', { noremap = false })
         vim.api.nvim_set_keymap('i', '<C-A>', '<Plug>(copilot-previous)', { noremap = false })
       end
-    },
-
-    -- {
-    --   -- Local plugin path
-    --   dir = '~/projects/neovim-gpt-agents',
-    --   config = function()
-    --   end
-    -- },
-
-    {
-      "robitx/gp.nvim",
-      config = function()
-        local conf = {
-          -- For customization, refer to Install > Configuration in the Documentation/Readme
-          providers = {
-            openai = {
-              endpoint = "https://api.openai.com/v1/chat/completions",
-              secret = os.getenv("OPENAI_API_KEY"),
-            },
-
-            azure = {
-              disable = true,
-              endpoint = "https://$URL.openai.azure.com/openai/deployments/{{model}}/chat/completions",
-              secret = os.getenv("AZURE_API_KEY"),
-            },
-
-            copilot = {
-              disable = true,
-              endpoint = "https://api.githubcopilot.com/chat/completions",
-            },
-
-            pplx = {
-              disable = true,
-              endpoint = "https://api.perplexity.ai/chat/completions",
-              secret = os.getenv("PPLX_API_KEY"),
-            },
-
-            ollama = {
-              disable = true,
-              endpoint = "http://localhost:11434/v1/chat/completions",
-            },
-
-            googleai = {
-              disable = true,
-              endpoint =
-              "https://generativelanguage.googleapis.com/v1beta/models/{{model}}:streamGenerateContent?key={{secret}}",
-              secret = os.getenv("GOOGLEAI_API_KEY"),
-            },
-
-            anthropic = {
-              disable = true,
-              endpoint = "https://api.anthropic.com/v1/messages",
-              secret = os.getenv("ANTHROPIC_API_KEY"),
-            },
-          },
-
-        }
-        require("gp").setup(conf)
-
-        -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
-      end,
     },
 
     { -- The ultimate undo history visualizer for VIM
@@ -257,39 +184,22 @@ require("lazy").setup({
       end,
     },
 
-    'gpanders/editorconfig.nvim', -- EditorConfig plugin for Vim
-
-    {
-      'nvim-lualine/lualine.nvim', -- A blazing fast Neovim statusline
+    { -- A blazing fast Neovim statusline
+      'nvim-lualine/lualine.nvim',
       dependencies = { 'kyazdani42/nvim-web-devicons', opt = true },
       config = function()
         require('lualine').setup()
       end
     },
 
-    {
-      "ellisonleao/gruvbox.nvim",
+    { -- theme and colorscheme
+      "folke/tokyonight.nvim",
       lazy = false,
       priority = 1000,
-      config = function()
-        -- load the colorscheme here
-        vim.o.background = "dark" -- or "light" for light mode
-        vim.cmd([[colorscheme gruvbox]])
-      end,
-    },
-
-    { -- A super powerful autopair plugin for Neovim that supports multiple characters
-      "windwp/nvim-autopairs",
-      config = function() require("nvim-autopairs").setup {} end
-    },
-
-    { -- auto-save
-      "Pocco81/auto-save.nvim",
-      config = function()
-        require("auto-save").setup {
-          -- your config goes here
-          -- or just leave it empty :)
-        }
+      opts = {},
+      config = function(_, opts)
+        require("tokyonight").setup(opts)
+        vim.cmd("colorscheme tokyonight-night")
       end,
     },
 
@@ -439,205 +349,8 @@ require("lazy").setup({
         })
       end
     },
-
-    {
-      {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v4.x',
-        lazy = true,
-        config = false,
-      },
-      {
-        'williamboman/mason.nvim',
-        lazy = false,
-        config = true,
-      },
-
-      -- Autocompletion
-      {
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        dependencies = {
-          { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } },
-        },
-        config = function()
-          local luasnip = require("luasnip")
-          local cmp = require("cmp")
-
-          require("luasnip.loaders.from_vscode").lazy_load()
-
-          cmp.setup({
-            sources = {
-              { name = 'nvim_lsp' },
-              { name = 'luasnip' },
-            },
-            mapping = {
-              ['<C-p>'] = cmp.mapping.select_prev_item(),
-              ['<C-n>'] = cmp.mapping.select_next_item(),
-              ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-              ['<C-f>'] = cmp.mapping.scroll_docs(4),
-              ['<C-Space>'] = cmp.mapping.complete(),
-              ['<C-e>'] = cmp.mapping.close(),
-              ['<CR>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  if luasnip.expandable() then
-                    luasnip.expand()
-                  else
-                    cmp.confirm({
-                      select = true,
-                    })
-                  end
-                else
-                  fallback()
-                end
-              end),
-
-              ["<Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_next_item()
-                elseif luasnip.locally_jumpable(1) then
-                  luasnip.jump(1)
-                else
-                  fallback()
-                end
-              end, { "i", "s" }),
-
-              ["<S-Tab>"] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                  cmp.select_prev_item()
-                elseif luasnip.locally_jumpable(-1) then
-                  luasnip.jump(-1)
-                else
-                  fallback()
-                end
-              end, { "i", "s" }),
-            },
-            snippet = {
-              expand = function(args)
-                vim.snippet.expand(args.body)
-              end,
-            },
-          })
-        end
-      },
-
-      { -- LSP
-        'neovim/nvim-lspconfig',
-        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-        event = { 'BufReadPre', 'BufNewFile' },
-        dependencies = {
-          { 'hrsh7th/cmp-nvim-lsp' },
-          { 'williamboman/mason.nvim' },
-          { 'williamboman/mason-lspconfig.nvim' },
-        },
-        config = function()
-          local lsp_zero = require('lsp-zero')
-
-          -- lsp_attach is where you enable features that only work
-          -- if there is a language server active in the file
-          local lsp_attach = function(client, bufnr)
-            local opts = { buffer = bufnr }
-
-            vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-            vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-            vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-            vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-            vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-            vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-            vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-            vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-            vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-            vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-          end
-
-          lsp_zero.extend_lspconfig({
-            sign_text = true,
-            lsp_attach = lsp_attach,
-            capabilities = require('cmp_nvim_lsp').default_capabilities()
-          })
-
-          require('mason-lspconfig').setup({
-            ensure_installed = {
-              'ts_ls',
-              'eslint',
-              'lua_ls',
-              'solargraph',
-              'intelephense',
-              'marksman',
-              'dockerls',
-              'bashls',
-            },
-            handlers = {
-              -- this first function is the "default handler"
-              -- it applies to every language server without a "custom handler"
-              function(server_name)
-                require('lspconfig')[server_name].setup({})
-              end,
-              intelephense = function()
-                local stubs = require('config/intelephense')
-                require("lspconfig").intelephense.setup({
-                  settings = {
-                    intelephense = {
-                      stubs = stubs,
-                    },
-                  },
-                })
-              end,
-            }
-          })
-
-          local prettier = {
-            formatCommand = "prettierd ${INPUT}",
-            formatStdin = true,
-            env = {
-              string.format("PRETTIERD_DEFAULT_CONFIG=%s",
-                vim.fn.expand("~/.config/nvim/utils/linter-config/.prettierrc.json")),
-            },
-          }
-
-          local lspconfig = require("lspconfig")
-
-          lspconfig.lua_ls.setup({
-            settings = {
-              Lua = {
-                diagnostics = {
-                  globals = { 'vim', 'redis', 'ARGV', 'KEYS' }
-                }
-              }
-            }
-          })
-
-          lspconfig.efm.setup({
-            init_options = { documentFormatting = true },
-            settings = {
-              rootMarkers = { ".git/" },
-              languages = {
-                javascript = { prettier },
-                typescript = { prettier },
-                javascriptreact = { prettier },
-                typescriptreact = { prettier },
-                json = { prettier },
-                css = { prettier },
-                html = { prettier },
-                php = { prettier },
-                -- Add other languages here if needed
-              },
-            },
-            filetypes = {
-              "javascript",
-              "typescript",
-              "javascriptreact",
-              "typescriptreact",
-              "json",
-              "css",
-              "html"
-              -- Add other filetypes here if needed
-            }
-          })
-        end
-      }
-    },
   },
+
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
@@ -647,10 +360,12 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
+
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  },                -- automatically check for plugin updates
+    enabled = false, -- check for plugin updates periodically
+    notify = false,  -- notify on update
+  },                 -- automatically check for plugin updates
+
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -666,4 +381,5 @@ require("lazy").setup({
       },
     },
   },
+
 })
