@@ -6,6 +6,10 @@ vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.filetype = "on"
 
+-- python environment
+vim.g.python3_host_prog = '~/.venv/nvim/bin/python3'
+vim.g.loaded_perl_provider = 0 -- Disable perl provider
+
 -- ============================================================================
 -- Core settings
 -- ============================================================================

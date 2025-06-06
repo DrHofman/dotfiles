@@ -359,12 +359,18 @@ require("lazy").setup({
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
+
   },
 
   checker = {
-    enabled = false, -- check for plugin updates periodically
-    notify = false,  -- notify on update
-  },                 -- automatically check for plugin updates
+    enabled = false,   -- check for plugin updates periodically
+    notify = false,    -- notify on update
+  },                   -- automatically check for plugin updates
+
+  change_detection = { -- automatically check for config file changes and reload the ui
+    enabled = false,   -- enable this feature to automatically check for config file changes
+    notify = false,    -- get a notification when changes are found
+  },
 
   performance = {
     rtp = {

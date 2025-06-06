@@ -2,6 +2,8 @@ local keymap = vim.api.nvim_set_keymap
 
 local opts = { noremap = true, silent = true }
 
+require('globals.less')
+
 -- Replace word under cursor in file
 keymap('n', '<Leader>s', ':%s/<C-r><C-w>//g<Left><Left>', { noremap = true })
 
