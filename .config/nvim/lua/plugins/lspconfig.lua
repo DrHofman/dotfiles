@@ -110,7 +110,7 @@ return {
             capabilities = default_lspconfig(capabilities).capabilities,
           })
         elseif server == 'lua_ls' then
-          lspconfig['solargraph'].setup({
+          lspconfig['lua_ls'].setup({
             on_attach = default_lspconfig(capabilities).on_attach,
             capabilities = default_lspconfig(capabilities).capabilities,
             settings = {
